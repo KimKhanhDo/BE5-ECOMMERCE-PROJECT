@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: be5-project
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,7 +40,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Ring','100','p1.png',1,10,'18K Gold Plated Cubic Zirconia Dual Stacking Rings for Women'),(2,'Watch','170','p2.png',1,20,'Emporio Armani Men\'s Classic Analog Analog-quartz Watch'),(3,'Teddy Bear','50','p3.png',1,30,'Gund Grahm Polyester Kids Soft Toy Teddy Bear'),(4,'Avoik Artificial Flowers','20','p4.png',1,40,'Bouquet Fake Flowers'),(5,'Baby Teddy Bear','82','p5.png',1,70,'Baby GUND My First Teddy Bear Peek A Boo Animated Stuffed Animal Plush'),(6,'Artificial Rose Flower','25','p6.png',1,20,'Mini Silk Rose Arrangement Bouquet Fake Rose Flower Ball for Wedding Party Decorations'),(7,'Seiko Watch','349','p7.png',1,50,'Seiko Men\'s Japanese Mechanical Automatic Watch'),(8,'Engagement Ring','150','p8.png',1,10,'Clarity Classic Lab Created Diamond Solitaire Ring 18K');
+INSERT INTO `product` VALUES (1,'Ring','100','p1.png',1,10,'King Will GLORY 6mm/8mm Matte Finish/Polished Tungsten Carbide Ring 24K'),(2,'Wach','170','p2.png',1,20,'Emporio Armani Men\'s Classic Analog Analog-quartz Watch'),(3,'Teddy Bear','50','p3.png',1,30,'Fuzzy Teddy Bear Stuffed Animal Plush'),(4,'Artifical Flowers','20','p4.png',1,40,'Artificial Flowers for Wedding Cake Addition Decorations'),(5,'Baby Teddy Bear','82','p5.png',1,60,'Disney Pooh Beanie Small Stuffed Plush Toy'),(6,'Arrtificial Rose Flower','25','p6.png',1,30,'Artificial Flowers for Wedding Cake Addition Decorations'),(7,'Seiko Watch','349','p7.png',1,23,'Seiko Men\'s Japanese Mechanical Automatic Watch'),(8,'Engagement Ring','150','p8.png',1,35,'Clarity Classic Lab Created Diamond Solitaire Ring 18K');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-28 21:24:45
+-- Dump completed on 2023-12-28 22:17:07
