@@ -39,21 +39,21 @@ public class ProductDAO {
 			Product product = new Product(id, name, price, imgName, isNew);
 			list.add(product);
 		}
-		return list; 
+		return list;
 	}
-	
+
 	public static Product getProductById(String productId) throws SQLException {
-		
+
 		Connection connection = DBConnection.makeConnection();
-		
+
 		String sqlQuery = "SELECT * FROM product WHERE id =?";
-		
+
 		PreparedStatement stmt = connection.prepareStatement(sqlQuery);
 		stmt.setString(1, productId);
 		ResultSet resultSet = stmt.executeQuery();
-		
-		 Product product = null;
-		
+
+		Product product = null;
+
 		while (resultSet.next()) {
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
@@ -62,9 +62,9 @@ public class ProductDAO {
 			boolean isNew = resultSet.getBoolean("is_new");
 			int quantity = resultSet.getInt("quantity");
 			String description = resultSet.getNString("description");
-			
+
 			product = new Product(id, name, price, imgName, isNew, quantity, description);
-					
+
 		}
 		return product;
 	}
