@@ -217,14 +217,14 @@ pageContext.setAttribute("lastestProducts", products);
 						</div>
 					</div>
 				</c:forEach>
-				</a>
+				
 			</div>
 		</div>
-		</div>
+		
 		<div class="btn-box">
-			<a href=""> View All Products </a>
+			<a href="all-products.jsp"> View All Products </a>
 		</div>
-		</div>
+		
 	</section>
 
 	<!-- end shop section -->

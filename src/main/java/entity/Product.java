@@ -14,6 +14,15 @@ public class Product {
 	}
 
 
+	public Product(int id, String name, int price, String imgName) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.imgName = imgName;
+	}
+
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
@@ -32,6 +41,8 @@ public class Product {
 	public Product() {
 		super();
 	}
+	
+	
 
 
 	public Product(int id, String name, int price, String imgName, boolean isNew) {
