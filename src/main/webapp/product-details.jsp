@@ -13,7 +13,6 @@
 <%
 String productId = request.getParameter("productId");
 
-
 // GET PRODUCT FROM DB by ProductId from requested parameter
 Product product = ProductDAO.getProductById(productId);
 
@@ -55,8 +54,7 @@ pageContext.setAttribute("product", product);
 		<!-- header section strats -->
 		<header class="header_section">
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
-				<a class="navbar-brand" href="index.jsp"> <span> Giftos
-				</span>
+				<a class="navbar-brand" href="index.jsp"> <span> Giftos </span>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -106,35 +104,33 @@ pageContext.setAttribute("product", product);
 				<h2>Product's Details</h2>
 			</div>
 			<div class="row">
-					<div clas
-					s="col-sm-6 col-md-4 col-lg-3">
-						<div class="box">
-							<a href="">
-								<div class="img-box">
-									<img src="images/${product.imgName}" alt="">
-								</div>
-								<div class="detail-box">
-									<h6>${product.name}</h6>
-									<h6>
-										Price <span>$${product.price}</span>
-									</h6>
-								</div>
-								<div class="new">
-									<span> New </span>
-								</div>
-							</a>
-						</div>
+				<div clas s="col-sm-6 col-md-4 col-lg-3">
+					<div class="box">
+						<a href="">
+							<div class="img-box">
+								<img src="images/${product.imgName}" alt="">
+							</div>
+							<div class="detail-box">
+								<h6>${product.name}</h6>
+								<h6>
+									Price <span>$${product.price}</span>
+								</h6>
+							</div>
+							<div class="new">
+								<span> New </span>
+							</div>
+						</a>
 					</div>
-					
-					<div class="col-sm-6 col-md-4 col-lg-9">
-						<div class="box">
-						Quantity: ${product.quantity}
-						<br>
-						Description: ${product.description}
-						</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4 col-lg-9">
+					<div class="box">
+						Quantity: ${product.quantity} <br> Description:
+						${product.description}
 					</div>
-					
-					
+				</div>
+
+
 				</a>
 			</div>
 		</div>
