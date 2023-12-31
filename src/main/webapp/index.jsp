@@ -19,7 +19,8 @@ List<Product> products = productDao.getLastestProducts();
 pageContext.setAttribute("lastestProducts", products);
 
 CategoryDAO categoryDao = new CategoryDAO();
-pageContext.setAttribute("categories", categoryDao.getAllCategories());
+List<Category> categories = categoryDao.getAllCategories();
+pageContext.setAttribute("categories", categories);
 
 %>
 
