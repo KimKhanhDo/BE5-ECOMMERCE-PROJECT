@@ -1,3 +1,6 @@
+<%@page import="dao.CategoryDAO"%>
+<%@page import="entity.Category"%>
+
 <%@page import="dao.ProductDAO"%>
 <%@page import="entity.Product"%>
 <%@page import="java.util.List"%>
@@ -13,8 +16,11 @@
 <%
 ProductDAO productDao = new ProductDAO();
 List<Product> products = productDao.getLastestProducts();
-
 pageContext.setAttribute("lastestProducts", products);
+
+CategoryDAO categoryDao = new CategoryDAO();
+pageContext.setAttribute("categories", categoryDao.getAllCategories());
+
 %>
 
 
@@ -52,8 +58,7 @@ pageContext.setAttribute("lastestProducts", products);
 		<!-- header section strats -->
 		<header class="header_section">
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
-				<a class="navbar-brand" href="index.jsp"> <span> Giftos
-				</span>
+				<a class="navbar-brand" href="index.jsp"> <span> Giftos </span>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -67,14 +72,13 @@ pageContext.setAttribute("lastestProducts", products);
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="shop.html">
-								Shop </a></li>
-						<li class="nav-item"><a class="nav-link" href="why.html">
-								Why Us </a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="testimonial.html"> Testimonial </a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Contact
-								Us</a></li>
+						<c:forEach items="${categories}" var="category">
+
+							<li class="nav-item"><a class="nav-link" href="shop.html">
+									${category.name} </a></li>
+
+						</c:forEach>
+
 					</ul>
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
@@ -217,14 +221,14 @@ pageContext.setAttribute("lastestProducts", products);
 						</div>
 					</div>
 				</c:forEach>
-				
+
 			</div>
 		</div>
-		
+
 		<div class="btn-box">
 			<a href="all-products.jsp"> View All Products </a>
 		</div>
-		
+
 	</section>
 
 	<!-- end shop section -->

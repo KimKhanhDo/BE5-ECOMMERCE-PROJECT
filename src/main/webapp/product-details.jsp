@@ -12,10 +12,10 @@
 
 <%
 String productId = request.getParameter("productId");
+ProductDAO productDao = new ProductDAO();
 
 // GET PRODUCT FROM DB by ProductId from requested parameter
 Product product = ProductDAO.getProductById(productId);
-
 pageContext.setAttribute("product", product);
 %>
 

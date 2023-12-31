@@ -45,16 +45,15 @@ public class ProductDAO {
 	public static Product getProductById(String productId) throws SQLException {
 
 		Connection connection = DBConnection.makeConnection();
+		Statement stmt = connection.createStatement();
 
 		String sqlQuery = "SELECT * FROM product WHERE id =?";
 
-		PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-		stmt.setString(1, productId);
-		ResultSet resultSet = stmt.executeQuery();
+		PreparedStatement preStmt = connection.prepareStatement(sqlQuery);
+		preStmt.setString(1, productId);
+		ResultSet resultSet = preStmt.executeQuery();
 
-		Product product = null;
-
-		while (resultSet.next()) {
+		if (resultSet.next()) {
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
@@ -63,12 +62,12 @@ public class ProductDAO {
 			int quantity = resultSet.getInt("quantity");
 			String description = resultSet.getNString("description");
 
-			product = new Product(id, name, price, imgName, isNew, quantity, description);
-
+			Product product = new Product(id, name, price, imgName, isNew, quantity, description);
+			return product;
 		}
-		return product;
+		return null;
 	}
-	
+
 	public List<Product> showAllProducts() throws SQLException {
 		Connection connection = DBConnection.makeConnection();
 		Statement stmt = connection.createStatement();
