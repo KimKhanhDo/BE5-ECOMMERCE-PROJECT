@@ -1,6 +1,8 @@
 <%@page import="dao.ProductDAO"%>
 <%@page import="entity.Product"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.CategoryDAO"%>
+<%@page import="entity.Category"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,12 +13,14 @@
 <html>
 
 <%
-String productId = request.getParameter("productId");
-ProductDAO productDao = new ProductDAO();
-
 // GET PRODUCT FROM DB by ProductId from requested parameter
+String productId = request.getParameter("productId");
 Product product = ProductDAO.getProductById(productId);
 pageContext.setAttribute("product", product);
+
+CategoryDAO categoryDao = new CategoryDAO();
+List<Category> categories = categoryDao.getAllCategories();
+pageContext.setAttribute("categories", categories);
 %>
 
 
@@ -68,14 +72,14 @@ pageContext.setAttribute("product", product);
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="shop.html">
-								Shop </a></li>
-						<li class="nav-item"><a class="nav-link" href="why.html">
-								Why Us </a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="testimonial.html"> Testimonial </a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Contact
-								Us</a></li>
+						<c:forEach items="${categories}" var="category">
+
+							<li class="nav-item"><a class="nav-link"
+								href="product-category.jsp?categoryId=${category.id}"> ${category.name}
+							</a></li>
+
+						</c:forEach>
+
 					</ul>
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
@@ -90,7 +94,7 @@ pageContext.setAttribute("product", product);
 					</div>
 				</div>
 			</nav>
-		</header>
+			</header>
 		<!-- end header section -->
 
 	</div>

@@ -45,8 +45,6 @@ public class ProductDAO {
 	public static Product getProductById(String productId) throws SQLException {
 
 		Connection connection = DBConnection.makeConnection();
-		Statement stmt = connection.createStatement();
-
 		String sqlQuery = "SELECT * FROM product WHERE id =?";
 
 		PreparedStatement preStmt = connection.prepareStatement(sqlQuery);

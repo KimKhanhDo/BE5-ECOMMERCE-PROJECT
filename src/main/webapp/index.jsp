@@ -14,14 +14,23 @@
 <html>
 
 <%
-ProductDAO productDao = new ProductDAO();
-List<Product> products = productDao.getLastestProducts();
-pageContext.setAttribute("lastestProducts", products);
-
+//Retrieve all categories from menu bar
 CategoryDAO categoryDao = new CategoryDAO();
 List<Category> categories = categoryDao.getAllCategories();
 pageContext.setAttribute("categories", categories);
 
+//Check if category ID is provided by client
+String categoryId = request.getParameter("categoryId");
+if (categoryId != null) {
+	List<Product> categeryProducts = categoryDao.getProductByCategoryId(categoryId);
+	pageContext.setAttribute("categoryProducts", categeryProducts);
+} else {
+	//Retrieve the latest products
+	ProductDAO productDao = new ProductDAO();
+	List<Product> lastestProducts = productDao.getLastestProducts();
+	pageContext.setAttribute("lastestProducts", lastestProducts);
+
+}
 %>
 
 
@@ -68,19 +77,20 @@ pageContext.setAttribute("categories", categories);
 					<span class=""></span>
 				</button>
 
+				<!-- category menu & category's products href link -->
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
-
-							<li class="nav-item"><a class="nav-link" href="shop.html">
-									${category.name} </a></li>
-
+							<li class="nav-item"><a class="nav-link"
+								href="index.jsp?categoryId=${category.id}"> ${category.name}
+							</a></li>
 						</c:forEach>
-
 					</ul>
+					<!-- end category menu -->
+
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
 								Login </span>
@@ -96,6 +106,10 @@ pageContext.setAttribute("categories", categories);
 			</nav>
 		</header>
 		<!-- end header section -->
+
+
+
+
 		<!-- slider section -->
 
 		<section class="slider_section">
@@ -195,44 +209,77 @@ pageContext.setAttribute("categories", categories);
 	<!-- end hero area -->
 
 	<!-- shop section -->
-
-	<section class="shop_section layout_padding">
-		<div class="container">
-			<div class="heading_container heading_center">
-				<h2>Latest Products</h2>
-			</div>
-			<div class="row">
-				<c:forEach items="${lastestProducts}" var="product">
-					<div class="col-sm-6 col-md-4 col-lg-3">
-						<div class="box">
-							<a href="product-details.jsp?productId=${product.id}">
-								<div class="img-box">
-									<img src="images/${product.imgName}" alt="">
-								</div>
-								<div class="detail-box">
-									<h6>${product.name}</h6>
-									<h6>
-										Price <span>${product.price}</span>
-									</h6>
-								</div>
-								<div class="new">
-									<span> New </span>
-								</div>
-							</a>
+	<!-- LASTEST products section -->
+	<c:if test="${not empty lastestProducts}">
+		<section class="shop_section layout_padding">
+			<div class="container">
+				<div class="heading_container heading_center">
+					<h2>Latest Products</h2>
+				</div>
+				<div class="row">
+					<c:forEach items="${lastestProducts}" var="product">
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="box">
+								<a href="product-details.jsp?productId=${product.id}">
+									<div class="img-box">
+										<img src="images/${product.imgName}" alt="">
+									</div>
+									<div class="detail-box">
+										<h6>${product.name}</h6>
+										<h6>
+											Price <span>${product.price}</span>
+										</h6>
+									</div>
+									<div class="new">
+										<span> New </span>
+									</div>
+								</a>
+							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
 
+				</div>
 			</div>
-		</div>
 
-		<div class="btn-box">
-			<a href="all-products.jsp"> View All Products </a>
-		</div>
+			<div class="btn-box">
+				<a href="all-products.jsp"> View All Products </a>
+			</div>
 
-	</section>
+		</section>
+	</c:if>
+
+	<!-- CATEGORY product listing page section-->
+	<c:if test="${not empty categoryProducts}">
+		<section class="shop_section layout_padding">
+			<div class="container">
+				<div class="heading_container heading_center">
+					<h2>Products in Category ${category.name}</h2>
+				</div>
+				<div class="row">
+					<c:forEach items="${categoryProducts}" var="product">
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="box">
+								<a href="product-details.jsp?productId=${product.id}">
+									<div class="img-box">
+										<img src="images/${product.imgName}" alt="" class="img-fluid">
+									</div>
+									<div class="detail-box">
+										<h6>${product.name}</h6>
+										<h6>
+											Price <span>${product.price}</span>
+										</h6>
+									</div>
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+	</c:if>
 
 	<!-- end shop section -->
+
 
 	<!-- saving section -->
 

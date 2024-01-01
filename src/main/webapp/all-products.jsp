@@ -2,6 +2,8 @@
 <%@page import="dao.ProductDAO"%>
 <%@page import="entity.Product"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="dao.CategoryDAO"%>
+<%@page import="entity.Category"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,11 +14,14 @@
 
 <%
 ProductDAO productDAO = new ProductDAO();
-
 List<Product> products = productDAO.showAllProducts();
-
 pageContext.setAttribute("allProducts", products);
+
+CategoryDAO categoryDao = new CategoryDAO();
+List<Category> categories = categoryDao.getAllCategories();
+pageContext.setAttribute("categories", categories);
 %>
+
 <head>
 <!-- Basic -->
 <meta charset="utf-8" />
@@ -48,7 +53,7 @@ pageContext.setAttribute("allProducts", products);
 <body>
 	<div class="hero_area">
 		<!-- header section strats -->
-		<header class="header_section">
+				<header class="header_section">
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
 				<a class="navbar-brand" href="index.jsp"> <span> Giftos </span>
 				</a>
@@ -64,14 +69,14 @@ pageContext.setAttribute("allProducts", products);
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="shop.jsp">
-								Shop </a></li>
-						<li class="nav-item"><a class="nav-link" href="why.jsp">
-								Why Us </a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="testimonial.jsp"> Testimonial </a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.jsp">Contact
-								Us</a></li>
+						<c:forEach items="${categories}" var="category">
+
+							<li class="nav-item"><a class="nav-link"
+								href="product-category.jsp?categoryId=${category.id}"> ${category.name}
+							</a></li>
+
+						</c:forEach>
+
 					</ul>
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
@@ -86,7 +91,7 @@ pageContext.setAttribute("allProducts", products);
 					</div>
 				</div>
 			</nav>
-		</header>
+			</header>
 		<!-- end header section -->
 
 		<!-- product listing page section-->
