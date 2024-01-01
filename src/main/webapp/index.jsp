@@ -29,7 +29,6 @@ if (categoryId != null) {
 	ProductDAO productDao = new ProductDAO();
 	List<Product> lastestProducts = productDao.getLastestProducts();
 	pageContext.setAttribute("lastestProducts", lastestProducts);
-
 }
 %>
 
@@ -49,6 +48,21 @@ if (categoryId != null) {
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
 <title>Giftos</title>
+
+<!--Search Form style -->
+  <style>
+        .user_option form {
+            margin-left: 10px; /* Adjust the left margin to create space between input and button */
+        }
+
+        .user_option input {
+            margin-right: 5px; /* Adjust the right margin of the input */
+        }
+        
+        ::placeholder {
+        font-size: 12px; /* Adjust the font size as needed */
+    }
+    </style>
 
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
@@ -96,19 +110,22 @@ if (categoryId != null) {
 								Login </span>
 						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
+						
+						<!-- search section -->
 						<form class="form-inline ">
+						<input type="text" name="searchField"
+								placeholder="Search product"
+								 />
 							<button class="btn nav_search-btn" type="submit">
 								<i class="fa fa-search" aria-hidden="true"></i>
 							</button>
 						</form>
+						<!-- end search section -->
 					</div>
 				</div>
 			</nav>
 		</header>
 		<!-- end header section -->
-
-
-
 
 		<!-- slider section -->
 
@@ -248,7 +265,7 @@ if (categoryId != null) {
 		</section>
 	</c:if>
 
-	<!-- CATEGORY product listing page section-->
+	<!-- CATEGORY products listing page section-->
 	<c:if test="${not empty categoryProducts}">
 		<section class="shop_section layout_padding">
 			<div class="container">
@@ -277,7 +294,6 @@ if (categoryId != null) {
 			</div>
 		</section>
 	</c:if>
-
 	<!-- end shop section -->
 
 
