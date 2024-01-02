@@ -13,13 +13,16 @@
 <html>
 
 <%
+// Retrieve all categories from menu bar
+CategoryDAO categoryDao = new CategoryDAO();
+List<Category> categories = categoryDao.getAllCategories();
+pageContext.setAttribute("categories", categories);
+
+// Show all products
 ProductDAO productDAO = new ProductDAO();
 List<Product> products = productDAO.showAllProducts();
 pageContext.setAttribute("allProducts", products);
 
-CategoryDAO categoryDao = new CategoryDAO();
-List<Category> categories = categoryDao.getAllCategories();
-pageContext.setAttribute("categories", categories);
 %>
 
 <head>
@@ -37,6 +40,22 @@ pageContext.setAttribute("categories", categories);
 
 <title>Giftos</title>
 
+<!--Search Form style -->
+<style>
+.user_option form {
+	margin-left: 10px;
+	/* Adjust the left margin to create space between input and button */
+}
+
+.user_option input {
+	margin-right: 5px; /* Adjust the right margin of the input */
+}
+
+::placeholder {
+	font-size: 12px; /* Adjust the font size as needed */
+}
+</style>
+
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -53,7 +72,7 @@ pageContext.setAttribute("categories", categories);
 <body>
 	<div class="hero_area">
 		<!-- header section strats -->
-				<header class="header_section">
+		<header class="header_section">
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
 				<a class="navbar-brand" href="index.jsp"> <span> Giftos </span>
 				</a>
@@ -64,34 +83,43 @@ pageContext.setAttribute("categories", categories);
 					<span class=""></span>
 				</button>
 
+				<!-- category menu & category's products href link -->
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
-
 							<li class="nav-item"><a class="nav-link"
-								href="product-category.jsp?categoryId=${category.id}"> ${category.name}
+								href="index.jsp?categoryId=${category.id}"> ${category.name}
 							</a></li>
-
 						</c:forEach>
-
 					</ul>
+					<!-- end category menu -->
+
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
 								Login </span>
 						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
-						<form class="form-inline ">
-							<button class="btn nav_search-btn" type="submit">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
-						</form>
+
+						<!-- search section -->
+						<div class="search_section">
+							<form action="search-section.jsp" method="post"
+								class="form-inline">
+								<input type="text" name="searchField"
+									placeholder="Search"/>
+								<button class="btn nav_search-btn" type="submit">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+						<!-- end search section -->
+
 					</div>
 				</div>
 			</nav>
-			</header>
+		</header>
 		<!-- end header section -->
 
 		<!-- product listing page section-->

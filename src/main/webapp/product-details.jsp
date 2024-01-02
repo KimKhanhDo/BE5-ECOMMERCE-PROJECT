@@ -18,6 +18,7 @@ String productId = request.getParameter("productId");
 Product product = ProductDAO.getProductById(productId);
 pageContext.setAttribute("product", product);
 
+// Retrieve all categories from menu bar
 CategoryDAO categoryDao = new CategoryDAO();
 List<Category> categories = categoryDao.getAllCategories();
 pageContext.setAttribute("categories", categories);
@@ -39,6 +40,22 @@ pageContext.setAttribute("categories", categories);
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
 <title>Giftos</title>
+
+<!--Search Form style -->
+<style>
+.user_option form {
+	margin-left: 10px;
+	/* Adjust the left margin to create space between input and button */
+}
+
+.user_option input {
+	margin-right: 5px; /* Adjust the right margin of the input */
+}
+
+::placeholder {
+	font-size: 12px; /* Adjust the font size as needed */
+}
+</style>
 
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
@@ -67,79 +84,85 @@ pageContext.setAttribute("categories", categories);
 					<span class=""></span>
 				</button>
 
+				<!-- category menu & category's products href link -->
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
-
 							<li class="nav-item"><a class="nav-link"
-								href="product-category.jsp?categoryId=${category.id}"> ${category.name}
+								href="index.jsp?categoryId=${category.id}"> ${category.name}
 							</a></li>
-
 						</c:forEach>
-
 					</ul>
+					<!-- end category menu -->
+
 					<div class="user_option">
 						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
 								Login </span>
 						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
-						<form class="form-inline ">
-							<button class="btn nav_search-btn" type="submit">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
-						</form>
+
+						<!-- search section -->
+						<div class="search_section">
+							<form action="search-section.jsp" method="post"
+								class="form-inline">
+								<input type="text" name="searchField"
+									placeholder="Search" />
+								<button class="btn nav_search-btn" type="submit">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+						<!-- end search section -->
+
 					</div>
 				</div>
 			</nav>
-			</header>
+		</header>
 		<!-- end header section -->
 
+		<!-- shop section -->
+
+		<section class="shop_section layout_padding">
+			<div class="container">
+				<div class="heading_container heading_center">
+					<h2>Product's Details</h2>
+				</div>
+				<div class="row">
+					<div clas s="col-sm-6 col-md-4 col-lg-3">
+						<div class="box">
+							<a href="">
+								<div class="img-box">
+									<img src="images/${product.imgName}" alt="">
+								</div>
+								<div class="detail-box">
+									<h6>${product.name}</h6>
+									<h6>
+										Price <span>$${product.price}</span>
+									</h6>
+								</div>
+								<div class="new">
+									<span> New </span>
+								</div>
+							</a>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-4 col-lg-9">
+						<div class="box">
+							Quantity: ${product.quantity} <br> Description:
+							${product.description}
+						</div>
+					</div>
+
+
+					</a>
+				</div>
+			</div>
 	</div>
-	<!-- end hero area -->
-
-	<!-- shop section -->
-
-	<section class="shop_section layout_padding">
-		<div class="container">
-			<div class="heading_container heading_center">
-				<h2>Product's Details</h2>
-			</div>
-			<div class="row">
-				<div clas s="col-sm-6 col-md-4 col-lg-3">
-					<div class="box">
-						<a href="">
-							<div class="img-box">
-								<img src="images/${product.imgName}" alt="">
-							</div>
-							<div class="detail-box">
-								<h6>${product.name}</h6>
-								<h6>
-									Price <span>$${product.price}</span>
-								</h6>
-							</div>
-							<div class="new">
-								<span> New </span>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-md-4 col-lg-9">
-					<div class="box">
-						Quantity: ${product.quantity} <br> Description:
-						${product.description}
-					</div>
-				</div>
-
-
-				</a>
-			</div>
-		</div>
-		</div>
-		</div>
+	</div>
 	</section>
 
 	<!-- end shop section -->

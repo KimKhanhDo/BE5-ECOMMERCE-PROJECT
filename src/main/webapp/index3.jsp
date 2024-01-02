@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.CategoryDAO"%>
 <%@page import="entity.Category"%>
 
@@ -22,13 +23,14 @@ pageContext.setAttribute("categories", categories);
 //Check if category ID is provided by client
 String categoryId = request.getParameter("categoryId");
 if (categoryId != null) {
-	List<Product> categeryProducts = categoryDao.getProductByCategoryId(categoryId);
-	pageContext.setAttribute("categoryProducts", categeryProducts);
+	List<Product> products = categoryDao.getProductByCategoryId(categoryId);
+	pageContext.setAttribute("categoryProducts", products);
 } else {
 	//Retrieve the latest products
 	ProductDAO productDao = new ProductDAO();
 	List<Product> lastestProducts = productDao.getLastestProducts();
 	pageContext.setAttribute("lastestProducts", lastestProducts);
+
 }
 %>
 
@@ -48,21 +50,6 @@ if (categoryId != null) {
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
 <title>Giftos</title>
-
-<!--Search Form style -->
-  <style>
-        .user_option form {
-            margin-left: 10px; /* Adjust the left margin to create space between input and button */
-        }
-
-        .user_option input {
-            margin-right: 5px; /* Adjust the right margin of the input */
-        }
-        
-        ::placeholder {
-        font-size: 12px; /* Adjust the font size as needed */
-    }
-    </style>
 
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
@@ -95,11 +82,11 @@ if (categoryId != null) {
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Home <span class="sr-only">(current)</span></a>
+							href="index3.jsp">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="index.jsp?categoryId=${category.id}"> ${category.name}
+								href="index3.jsp?categoryId=${category.id}">${category.name}
 							</a></li>
 						</c:forEach>
 					</ul>
@@ -110,24 +97,19 @@ if (categoryId != null) {
 								Login </span>
 						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
-						
-						<!-- search section -->
-						<div class="search_section">
-						<form action="search-section.jsp" method="post" class="form-inline">
-						<input type="text" name="searchField"
-								placeholder="Search"/>
+						<form class="form-inline ">
 							<button class="btn nav_search-btn" type="submit">
 								<i class="fa fa-search" aria-hidden="true"></i>
 							</button>
 						</form>
-						</div>
-						<!-- end search section -->
-						
 					</div>
 				</div>
 			</nav>
 		</header>
 		<!-- end header section -->
+
+
+
 
 		<!-- slider section -->
 
@@ -267,13 +249,14 @@ if (categoryId != null) {
 		</section>
 	</c:if>
 
-	<!-- CATEGORY products listing page section-->
+	<!-- CATEGORY product listing page section-->
 	<c:if test="${not empty categoryProducts}">
 		<section class="shop_section layout_padding">
 			<div class="container">
 				<div class="heading_container heading_center">
 					<h2>Products in Category ${category.name}</h2>
 				</div>
+
 				<div class="row">
 					<c:forEach items="${categoryProducts}" var="product">
 						<div class="col-sm-6 col-md-4 col-lg-3">
@@ -296,7 +279,16 @@ if (categoryId != null) {
 			</div>
 		</section>
 	</c:if>
+
+
 	<!-- end shop section -->
+
+
+
+	<!-- end shop section -->
+
+
+
 
 
 	<!-- saving section -->
