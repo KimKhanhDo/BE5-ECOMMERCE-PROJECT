@@ -76,6 +76,10 @@ public class Product {
 	public boolean isNew() {
 		return isNew;
 	}
+	
+	public boolean getIsNew() {
+		return isNew;
+	}
 
 	public void setNew(boolean isNew) {
 		this.isNew = isNew;

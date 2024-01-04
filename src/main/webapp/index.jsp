@@ -14,22 +14,28 @@
 <html>
 
 <%
-//Retrieve all categories from menu bar
 CategoryDAO categoryDao = new CategoryDAO();
+ProductDAO productDao = new ProductDAO();
+
+List<Product> products;
+
+//get request from playload
+String categoryId = request.getParameter("categoryId");
+String action = request.getParameter("action");
+
+if ("SHOW_ALL".equals(action)) {
+	products = productDao.showAllProducts();
+} else if (categoryId != null) {
+	products = categoryDao.getProductByCategoryId(categoryId);
+} else {
+	products = productDao.getLastestProducts();
+}
+
+// Set pageContext
+pageContext.setAttribute("products", products);
+
 List<Category> categories = categoryDao.getAllCategories();
 pageContext.setAttribute("categories", categories);
-
-//Check if category ID is provided by client
-String categoryId = request.getParameter("categoryId");
-if (categoryId != null) {
-	List<Product> categeryProducts = categoryDao.getProductByCategoryId(categoryId);
-	pageContext.setAttribute("categoryProducts", categeryProducts);
-} else {
-	//Retrieve the latest products
-	ProductDAO productDao = new ProductDAO();
-	List<Product> lastestProducts = productDao.getLastestProducts();
-	pageContext.setAttribute("lastestProducts", lastestProducts);
-}
 %>
 
 
@@ -50,19 +56,20 @@ if (categoryId != null) {
 <title>Giftos</title>
 
 <!--Search Form style -->
-  <style>
-        .user_option form {
-            margin-left: 10px; /* Adjust the left margin to create space between input and button */
-        }
+<style>
+.user_option form {
+	margin-left: 10px;
+	/* Adjust the left margin to create space between input and button */
+}
 
-        .user_option input {
-            margin-right: 5px; /* Adjust the right margin of the input */
-        }
-        
-        ::placeholder {
-        font-size: 12px; /* Adjust the font size as needed */
-    }
-    </style>
+.user_option input {
+	margin-right: 5px; /* Adjust the right margin of the input */
+}
+
+::placeholder {
+	font-size: 12px; /* Adjust the font size as needed */
+}
+</style>
 
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
@@ -110,19 +117,19 @@ if (categoryId != null) {
 								Login </span>
 						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
-						
+
 						<!-- search section -->
 						<div class="search_section">
-						<form action="search-section.jsp" method="post" class="form-inline">
-						<input type="text" name="searchField"
-								placeholder="Search"/>
-							<button class="btn nav_search-btn" type="submit">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
-						</form>
+							<form action="search-section.jsp" method="post"
+								class="form-inline">
+								<input type="text" name="searchField" placeholder="Search" />
+								<button class="btn nav_search-btn" type="submit">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
 						</div>
 						<!-- end search section -->
-						
+
 					</div>
 				</div>
 			</nav>
@@ -228,76 +235,42 @@ if (categoryId != null) {
 	<!-- end hero area -->
 
 	<!-- shop section -->
-	<!-- LASTEST products section -->
-	<c:if test="${not empty lastestProducts}">
-		<section class="shop_section layout_padding">
-			<div class="container">
-				<div class="heading_container heading_center">
-					<h2>Latest Products</h2>
-				</div>
-				<div class="row">
-					<c:forEach items="${lastestProducts}" var="product">
-						<div class="col-sm-6 col-md-4 col-lg-3">
-							<div class="box">
-								<a href="product-details.jsp?productId=${product.id}">
-									<div class="img-box">
-										<img src="images/${product.imgName}" alt="">
-									</div>
-									<div class="detail-box">
-										<h6>${product.name}</h6>
-										<h6>
-											Price <span>${product.price}</span>
-										</h6>
-									</div>
+	
+	<section class="shop_section layout_padding">
+		<div class="container">
+			<div class="heading_container heading_center">
+				<h2>Products</h2>
+			</div>
+			<div class="row">
+				<c:forEach items="${products}" var="product">
+					<div class="col-sm-6 col-md-4 col-lg-3">
+						<div class="box">
+							<a href="product-details.jsp?productId=${product.id}">
+								<div class="img-box">
+									<img src="images/${product.imgName}" alt="">
+								</div>
+								<div class="detail-box">
+									<h6>${product.name}</h6>
+									<h6>
+										Price <span>$${product.price}</span>
+									</h6>
+								</div> <c:if test="${product.isNew == true}">
 									<div class="new">
 										<span> New </span>
 									</div>
-								</a>
-							</div>
+								</c:if>
+							</a>
 						</div>
-					</c:forEach>
-
-				</div>
+					</div>
+				</c:forEach>
 			</div>
-
 			<div class="btn-box">
-				<a href="all-products.jsp"> View All Products </a>
+				<a href="index.jsp?action=SHOW_ALL"> View All Products </a>
 			</div>
-
-		</section>
-	</c:if>
-
-	<!-- CATEGORY products listing page section-->
-	<c:if test="${not empty categoryProducts}">
-		<section class="shop_section layout_padding">
-			<div class="container">
-				<div class="heading_container heading_center">
-					<h2>Products in Category ${category.name}</h2>
-				</div>
-				<div class="row">
-					<c:forEach items="${categoryProducts}" var="product">
-						<div class="col-sm-6 col-md-4 col-lg-3">
-							<div class="box">
-								<a href="product-details.jsp?productId=${product.id}">
-									<div class="img-box">
-										<img src="images/${product.imgName}" alt="" class="img-fluid">
-									</div>
-									<div class="detail-box">
-										<h6>${product.name}</h6>
-										<h6>
-											Price <span>${product.price}</span>
-										</h6>
-									</div>
-								</a>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</section>
-	</c:if>
+		</div>
+	</section>
+	
 	<!-- end shop section -->
-
 
 	<!-- saving section -->
 
