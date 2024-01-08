@@ -112,10 +112,35 @@ pageContext.setAttribute("categories", categories);
 					</ul>
 					<!-- end category menu -->
 
+					<!-- 	<div class="user_option">
+						<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
+							<span> Login </span>
+							
+							</a> <a href=""> <i class="fa fa-sign-out"
+							aria-hidden="true"></i> <span>Logout</span>
+						</a> -->
+
+
 					<div class="user_option">
-						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
-								Login </span>
-						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+						<c:if test="${not empty sessionScope.userName}">
+							<i class="fa fa-user" aria-hidden="true"
+								style="margin-right: 5px;"></i>
+							<span style="margin-right: 5px;"> ${sessionScope.userName}
+								&nbsp;</span>
+
+							<a href="logout"> Logout <i class="fa fa-sign-out"
+								aria-hidden="true"></i>
+							</a>
+						</c:if>
+
+						<c:if test="${sessionScope.userName == null }">
+							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
+								<span> Login </span></a>
+						</c:if>
+
+
+
+						<a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
 
 						<!-- search section -->
@@ -235,7 +260,7 @@ pageContext.setAttribute("categories", categories);
 	<!-- end hero area -->
 
 	<!-- shop section -->
-	
+
 	<section class="shop_section layout_padding">
 		<div class="container">
 			<div class="heading_container heading_center">
@@ -269,7 +294,7 @@ pageContext.setAttribute("categories", categories);
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- end shop section -->
 
 	<!-- saving section -->

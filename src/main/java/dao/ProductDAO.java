@@ -102,7 +102,8 @@ public class ProductDAO {
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
 			String imgName = resultSet.getString("img_name");
-			Product product = new Product(id, name, price, imgName);
+			boolean isNew = resultSet.getBoolean("is_new");
+			Product product = new Product(id, name, price, imgName, isNew);
 			list.add(product);
 		}
 		return list;
