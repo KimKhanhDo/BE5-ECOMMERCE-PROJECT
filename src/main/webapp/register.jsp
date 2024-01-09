@@ -102,7 +102,7 @@
 			<div class="row">
 				<div class="col-md-6 col-lg-3 px-0"></div>
 				<div class="col-md-6 col-lg-6 px-0">
-					<form action="register2" method="POST">
+					<form action="register" method="POST">
 
 						<div>
 							<label>First Name* </label> <input type="text"
@@ -120,7 +120,7 @@
 						</div>
 
 						<div>
-							<label>Phone* </label> <input type="phone" placeholder="Phone"
+							<label>Phone* </label> <input type="tel" placeholder="Phone"
 								name="phoneNo" required />
 						</div>
 

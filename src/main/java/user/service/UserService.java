@@ -1,4 +1,4 @@
-package user;
+package user.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,10 @@ import sql.connection.DBConnection;
 
 public class UserService {
 
-	public User getUserByLogin(String email, String password) throws SQLException {
+	public User getUserByEmailAndPassword(String email, String password) throws SQLException {
+		
+		 // Hash the password before checking in the database
+        String hashedPassword = Encryption.convertToSHA1(password);
 
 		// Check if the user exists and the password is correct
 		Connection connection = DBConnection.makeConnection();
@@ -18,49 +21,31 @@ public class UserService {
 
 		PreparedStatement preStmt = connection.prepareStatement(query);
 		preStmt.setString(1, email);
-		preStmt.setString(2, password);
+		preStmt.setString(2, hashedPassword);
 
 		ResultSet resultSet = preStmt.executeQuery();
-		// System.out.println(preStmt);
 
 		if (resultSet.next()) {
 			String userName = resultSet.getString("user_name");
 			User user = new User(userName);
-			// System.out.println(user.toString());
 			return user;
 		}
 		return null;
 	}
 
-
-	public boolean registerAccount(User user) throws SQLException {
-
-		Connection connection = DBConnection.makeConnection();
-		String query = "INSERT INTO `user` (`first_name`, `last_name`, `email`, `phoneNo`, `user_name`, `password`) VALUES (?,?,?,?,?,?)";
-
-		PreparedStatement insertStatement = connection.prepareStatement(query);
-		insertStatement.setString(1, user.getFirstName());
-		insertStatement.setString(2, user.getLastName());
-		insertStatement.setString(3, user.getEmail());
-		insertStatement.setInt(4, user.getPhoneNo());
-		insertStatement.setString(5, user.getUserName());
-		insertStatement.setString(6, user.getPassword());
-
-		insertStatement.executeUpdate();
-
-		if (insertStatement != null) {
-			insertStatement.close();
-		}
-		return true;
-	}
 	
-	public void registerAccount2(User user) throws SQLException {
+	public void registerAccount(User user) throws SQLException {
         // Check if the user already exists
         if (checkExistUserByEmail(user.getEmail())) {
             System.out.println("This Account Already Exists. Please register a new one");
             return;
         }
 
+
+        // Hash the password before storing it in the database
+        String hashedPassword = Encryption.convertToSHA1(user.getPassword());
+        user.setPassword(hashedPassword);
+        
         Connection connection = DBConnection.makeConnection();
         String query = "INSERT INTO `user` (`first_name`, `last_name`, `email`, `phoneNo`, `user_name`, `password`) VALUES (?,?,?,?,?,?)";
 
@@ -68,7 +53,7 @@ public class UserService {
             insertStatement.setString(1, user.getFirstName());
             insertStatement.setString(2, user.getLastName());
             insertStatement.setString(3, user.getEmail());
-            insertStatement.setInt(4, user.getPhoneNo());
+            insertStatement.setString(4, user.getPhoneNo());
             insertStatement.setString(5, user.getUserName());
             insertStatement.setString(6, user.getPassword());
 

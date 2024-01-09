@@ -1,4 +1,4 @@
-<%@page import="user.UserService"%>
+<%@page import="user.service.UserService"%>
 <%@page import="entity.User"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

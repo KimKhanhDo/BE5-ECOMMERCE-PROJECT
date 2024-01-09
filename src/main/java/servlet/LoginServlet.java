@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.User;
-import user.UserService;
+import user.service.Encryption;
+import user.service.UserService;
 
 /**
  * Servlet implementation class Login
@@ -50,13 +51,12 @@ public class LoginServlet extends HttpServlet {
 				String password = request.getParameter("password");
 				
 				UserService userService = new UserService();
-				User user = userService.getUserByLogin(email, password);
+				User user = userService.getUserByEmailAndPassword(email, password);
 				
 					
 					if(user == null) {
 						String errorMessage = "Your username or password is incorrect, please re-enter.";
 						request.setAttribute("errorMessage", errorMessage);
-						//request.setAttribute("email", email);
 						RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 						rd.forward(request, response);
 					}else {

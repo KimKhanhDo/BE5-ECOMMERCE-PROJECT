@@ -5,7 +5,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private int phoneNo;
+	private String phoneNo;
 	private String userName;
 	private String password;
 	
@@ -23,7 +23,7 @@ public class User {
 	
 
 
-	public User(String firstName, String lastName, String email, int phoneNo, String userName, String password) {
+	public User(String firstName, String lastName, String email, String phoneNo, String userName, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -35,7 +35,7 @@ public class User {
 
 
 
-	public User(int id, String firstName, String lastName, String email, int phoneNo, String userName,
+	public User(int id, String firstName, String lastName, String email, String phoneNo, String userName,
 			String password) {
 		super();
 		this.id = id;
@@ -79,11 +79,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getPhoneNo() {
+	public String getPhoneNo() {
 		return phoneNo;
 	}
 
-	public void setPhoneNo(int phoneNo) {
+	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 
