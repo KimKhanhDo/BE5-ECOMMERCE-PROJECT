@@ -126,28 +126,40 @@
 
 						<div>
 							<label>Username* </label> <input type="text"
-								placeholder="Username" name="username" />
+								placeholder="Username" name="username" required />
 						</div>
 
 						<div>
 							<label>Password* </label> <input type="password"
-								placeholder="At least 6 characters" name="password" />
+								placeholder="At least 6 characters" name="password"
+								id="password" required onkeyup="checkReEnterPassword()" />
 						</div>
+
 						<div>
-							<label>Re - enter Password* </label> <input type="password"
-								placeholder="" name="password" />
+							<label>Re-enter Password* </label> <span id="errorMessage"
+								style="color: red;"></span> <input type="password"
+								placeholder="" name="reEnterPassword" id="reEnterPassword"
+								required onkeyup="checkReEnterPassword()" />
 						</div>
 
-						<div class="d-flex ">
-
-
+						<!-- <div class="d-flex ">
 							<label class="inline mr-5"> I agree <a href="#">Terms
 									& Condition</a>
-
 							</label>
-
 							<button>REGISTER</button>
-						</div>
+						</div> -->
+<div class="d-flex align-items-center justify-content-end">
+    <label class="form-check-label mr-2" for="agreeCheckbox">I agree <a href="#">Terms & Conditions</a></label>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" id="agreeCheckbox" required style="transform: scale(1);">
+    </div>
+    <button onclick="validateAgreement()">REGISTER</button>
+</div>
+
+
+
+						
+
 					</form>
 					<div>
 						Already have an account? <a href="login.jsp">Sign In </a>
@@ -234,6 +246,31 @@
 		
 	</script>
 	<script src="js/custom.js"></script>
+
+	<script>
+		function checkReEnterPassword() {
+			password = document.getElementById("password").value;
+			reEnterPassword = document.getElementById("reEnterPassword").value;
+			if (password != reEnterPassword) {
+				document.getElementById("errorMessage").innerHTML = "Passwords do NOT match";
+				return false;
+			} else {
+				document.getElementById("errorMessage").innerHTML = "";
+				return true;
+			}
+		}
+	</script>
+
+	<script>
+		function validateAgreement() {
+			var agreeCheckbox = document.getElementById("agreeCheckbox");
+
+			if (!agreeCheckbox.checked) {
+				alert("Please agree to the Terms & Conditions before registering.");
+				return false;
+			}
+		}
+	</script>
 
 </body>
 

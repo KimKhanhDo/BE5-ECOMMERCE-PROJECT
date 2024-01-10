@@ -14,18 +14,17 @@ public class Encryption {
 		userPassword = userPassword + salt;
 		
 		try {
-			byte[] dataBytes = userPassword.getBytes("UTF-8");
 			MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
-			result = Base64.encodeBase64String(messageDigest.digest(dataBytes));
-			
+			result = Base64.encodeBase64String(messageDigest.digest(userPassword.getBytes()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(convertToSHA1("123456"));
-	}
+	// Test the method
+//	public static void main(String[] args) {
+//		System.out.println(convertToSHA1("123456"));
+//	}
 
 }
