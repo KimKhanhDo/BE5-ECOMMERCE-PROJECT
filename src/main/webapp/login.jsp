@@ -1,5 +1,4 @@
-<%@page import="user.service.UserService"%>
-<%@page import="entity.User"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -112,7 +111,7 @@
 		<div class="container px-0">
 			<div class="heading_container ">
 				<h2 class="">Login</h2>
-				
+
 				<c:if test="${not empty errorMessage}">
 					<p style="color: red;">${errorMessage}</p>
 				</c:if>
@@ -125,7 +124,7 @@
 				<div class="col-md-6 col-lg-6 px-0">
 
 					<!-- Form -->
-					<form action="login" method="post">
+					<form action="Authentication" method="post">
 						<div>
 							<label>Please Login To Your Account</label> <input type="text"
 								placeholder="Email" name="email" required />
@@ -137,11 +136,11 @@
 						<div>Forgot Password?</div>
 						<div class="button-container">
 							<button type="submit" class="login-button">LOGIN</button>
-							<button type="button" onclick="location.href='register.jsp';" class="register-button">REGISTER</button>
+							<button type="button" onclick="location.href='register.jsp';"
+								class="register-button">REGISTER</button>
 						</div>
 					</form>
-
-
+					<!-- End Form -->
 
 
 

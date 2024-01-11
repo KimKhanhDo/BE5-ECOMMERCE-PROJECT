@@ -1,9 +1,3 @@
-<%@page import="dao.ProductDAO"%>
-<%@page import="entity.Product"%>
-<%@page import="java.util.List"%>
-<%@page import="dao.CategoryDAO"%>
-<%@page import="entity.Category"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -11,20 +5,6 @@
 
 <!DOCTYPE html>
 <html>
-
-<%
-// GET PRODUCT FROM DB by ProductId from requested parameter
-String productId = request.getParameter("productId");
-Product product = ProductDAO.getProductById(productId);
-pageContext.setAttribute("product", product);
-
-// Retrieve all categories from menu bar
-CategoryDAO categoryDao = new CategoryDAO();
-List<Category> categories = categoryDao.getAllCategories();
-pageContext.setAttribute("categories", categories);
-%>
-
-
 
 <head>
 <!-- Basic -->
@@ -88,7 +68,7 @@ pageContext.setAttribute("categories", categories);
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Home <span class="sr-only">(current)</span></a>
+							href="Home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
@@ -124,7 +104,6 @@ pageContext.setAttribute("categories", categories);
 		<!-- end header section -->
 
 		<!-- shop section -->
-
 		<section class="shop_section layout_padding">
 			<div class="container">
 				<div class="heading_container heading_center">
@@ -137,6 +116,7 @@ pageContext.setAttribute("categories", categories);
 								<div class="img-box">
 									<img src="images/${product.imgName}" alt="">
 								</div>
+								
 								<div class="detail-box">
 									<h6>${product.name}</h6>
 									<h6>

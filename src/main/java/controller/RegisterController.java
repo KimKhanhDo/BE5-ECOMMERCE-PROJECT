@@ -1,4 +1,4 @@
-package servlet;
+package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDAO;
 import entity.User;
-import user.service.UserService;
+
 
 /**
  * Servlet implementation class RegisterServlet2
  */
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/Register")
+public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public RegisterController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,9 +42,9 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//doGet(request, response);
-		// --> Register Account
-		// Read data input from user
-
+		
+		// Register Account -->  Read data input from user
+	
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
@@ -52,13 +53,13 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		User user = new User(firstName, lastName, email, phoneNo, username, password);
 
-		UserService userService = new UserService();
+		UserDAO userDAO = new UserDAO();
 		
 		 try {
-			 if (userService.checkExistUserByEmail(email)) {
+			 if (userDAO.checkExistUserByEmail(email)) {
 	                response.sendRedirect("register.jsp?errorMessage=Email already exists. Please choose another one.");
 	            } else {
-	                userService.registerAccount(user);
+	            	userDAO.registerAccount(user);
 	                response.sendRedirect("login.jsp");
 	            }
 	        } catch (SQLException e) {

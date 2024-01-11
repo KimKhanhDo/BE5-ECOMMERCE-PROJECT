@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 
 
-
 <!DOCTYPE html>
 <html>
 
@@ -102,7 +101,9 @@
 			<div class="row">
 				<div class="col-md-6 col-lg-3 px-0"></div>
 				<div class="col-md-6 col-lg-6 px-0">
-					<form action="register" method="POST">
+
+					<!-- Start Form -->
+					<form action="Register" method="POST">
 
 						<div>
 							<label>First Name* </label> <input type="text"
@@ -148,19 +149,19 @@
 							</label>
 							<button>REGISTER</button>
 						</div> -->
-<div class="d-flex align-items-center justify-content-end">
-    <label class="form-check-label mr-2" for="agreeCheckbox">I agree <a href="#">Terms & Conditions</a></label>
-    <div class="form-check form-check-inline">
-        <input type="checkbox" class="form-check-input" id="agreeCheckbox" required style="transform: scale(1);">
-    </div>
-    <button onclick="validateAgreement()">REGISTER</button>
-</div>
-
-
-
-						
-
+						<div class="d-flex align-items-center justify-content-end">
+							<label class="form-check-label mr-2" for="agreeCheckbox">I
+								agree <a href="#">Terms & Conditions</a>
+							</label>
+							<div class="form-check form-check-inline">
+								<input type="checkbox" class="form-check-input"
+									id="agreeCheckbox" required style="transform: scale(1);">
+							</div>
+							<button onclick="validateAgreement()">REGISTER</button>
+						</div>
 					</form>
+					<!-- End Form -->
+					
 					<div>
 						Already have an account? <a href="login.jsp">Sign In </a>
 					</div>

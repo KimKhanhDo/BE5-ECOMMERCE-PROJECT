@@ -3,7 +3,6 @@
 
 <%@page import="dao.ProductDAO"%>
 <%@page import="entity.Product"%>
-<%@page import="java.util.List"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,34 +11,6 @@
 
 <!DOCTYPE html>
 <html>
-
-<%
-CategoryDAO categoryDao = new CategoryDAO();
-ProductDAO productDao = new ProductDAO();
-
-List<Product> products;
-
-//get request from playload
-String categoryId = request.getParameter("categoryId");
-String action = request.getParameter("action");
-
-if ("SHOW_ALL".equals(action)) {
-	products = productDao.showAllProducts();
-} else if (categoryId != null) {
-	products = categoryDao.getProductByCategoryId(categoryId);
-} else {
-	products = productDao.getLastestProducts();
-}
-
-// Set pageContext
-pageContext.setAttribute("products", products);
-
-List<Category> categories = categoryDao.getAllCategories();
-pageContext.setAttribute("categories", categories);
-%>
-
-
-
 <head>
 <!-- Basic -->
 <meta charset="utf-8" />
@@ -101,26 +72,19 @@ pageContext.setAttribute("categories", categories);
 				<!-- category menu & category's products href link -->
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
-						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Home <span class="sr-only">(current)</span></a>
-						</li>
+						<li class="nav-item active"><a class="nav-link" href="Home">Home
+								<span class="sr-only">(current)</span>
+						</a></li>
+
+						<!-- Send http request to Home with payload categoryID= ???? -->
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="index.jsp?categoryId=${category.id}"> ${category.name}
-							</a></li>
+								href="Home?categoryId=${category.id}"> ${category.name} </a></li>
 						</c:forEach>
 					</ul>
 					<!-- end category menu -->
 
-					<!-- 	<div class="user_option">
-						<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
-							<span> Login </span>
-							
-							</a> <a href=""> <i class="fa fa-sign-out"
-							aria-hidden="true"></i> <span>Logout</span>
-						</a> -->
-
-
+					<!-- Login/ Logout section -->
 					<div class="user_option">
 						<c:if test="${not empty sessionScope.userName}">
 							<i class="fa fa-user" aria-hidden="true"
@@ -128,7 +92,7 @@ pageContext.setAttribute("categories", categories);
 							<span style="margin-right: 5px;"> ${sessionScope.userName}
 								&nbsp;</span>
 
-							<a href="logout"> Logout <i class="fa fa-sign-out"
+							<a href="Authentication"> Logout <i class="fa fa-sign-out"
 								aria-hidden="true"></i>
 							</a>
 						</c:if>
@@ -137,7 +101,7 @@ pageContext.setAttribute("categories", categories);
 							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
 								<span> Login </span></a>
 						</c:if>
-
+						<!-- End Login/ Logout section -->
 
 
 						<a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -145,9 +109,9 @@ pageContext.setAttribute("categories", categories);
 
 						<!-- search section -->
 						<div class="search_section">
-							<form action="search-section.jsp" method="post"
+							<form action="SearchProduct" method="get"
 								class="form-inline">
-								<input type="text" name="searchField" placeholder="Search" />
+								<input type="text" name="searchValue" placeholder="Search" />
 								<button class="btn nav_search-btn" type="submit">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
@@ -260,7 +224,6 @@ pageContext.setAttribute("categories", categories);
 	<!-- end hero area -->
 
 	<!-- shop section -->
-
 	<section class="shop_section layout_padding">
 		<div class="container">
 			<div class="heading_container heading_center">
@@ -270,7 +233,7 @@ pageContext.setAttribute("categories", categories);
 				<c:forEach items="${products}" var="product">
 					<div class="col-sm-6 col-md-4 col-lg-3">
 						<div class="box">
-							<a href="product-details.jsp?productId=${product.id}">
+							<a href="ProductDetail?productId=${product.id}">
 								<div class="img-box">
 									<img src="images/${product.imgName}" alt="">
 								</div>
@@ -290,11 +253,10 @@ pageContext.setAttribute("categories", categories);
 				</c:forEach>
 			</div>
 			<div class="btn-box">
-				<a href="index.jsp?action=SHOW_ALL"> View All Products </a>
+				<a href="Home?action=SHOW_ALL"> View All Products </a>
 			</div>
 		</div>
 	</section>
-
 	<!-- end shop section -->
 
 	<!-- saving section -->

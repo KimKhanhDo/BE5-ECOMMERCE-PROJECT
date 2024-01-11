@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 
-<%
+<%-- <%
 // Retrieve all categories from menu bar
 CategoryDAO categoryDao = new CategoryDAO();
 //List<Category> categories = categoryDao.getAllCategories();
@@ -22,7 +22,7 @@ pageContext.setAttribute("categories", categoryDao.getAllCategories());
 // Show search result
 String productName = request.getParameter("searchField");
 pageContext.setAttribute("productBySearch", ProductDAO.getProductBySearch(productName));
-%>
+%> --%>
 
 
 
@@ -88,11 +88,11 @@ pageContext.setAttribute("productBySearch", ProductDAO.getProductBySearch(produc
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Home <span class="sr-only">(current)</span></a>
+							href="Home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="index.jsp?categoryId=${category.id}"> ${category.name}
+								href="Home?categoryId=${category.id}"> ${category.name}
 							</a></li>
 						</c:forEach>
 					</ul>
@@ -106,9 +106,9 @@ pageContext.setAttribute("productBySearch", ProductDAO.getProductBySearch(produc
 
 						<!-- search section -->
 						<div class="search_section">
-							<form action="search-section.jsp" method="post"
+							<form action="SearchProduct" method="get"
 								class="form-inline">
-								<input type="text" name="searchField" placeholder="Search" />
+								<input type="text" name="searchValue" placeholder="Search" />
 								<button class="btn nav_search-btn" type="submit">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
