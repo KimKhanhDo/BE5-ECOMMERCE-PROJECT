@@ -42,6 +42,7 @@ public class HomeController extends HttpServlet {
 
 			String categoryId = request.getParameter("categoryId");
 			String action = request.getParameter("action");
+			String productName = request.getParameter("searchValue");
 
 			// USE MODEL to get PRODUCT LIST (DATA), CATEGORY LIST
 			ProductDAO productDao = new ProductDAO();
@@ -53,6 +54,8 @@ public class HomeController extends HttpServlet {
 				products = productDao.showAllProducts();
 			} else if (categoryId != null) {
 				products = categoryDao.getProductByCategoryId(categoryId);
+			} else if (productName != null) {
+				products = ProductDAO.getProductBySearch(productName);
 			} else {
 				products = productDao.getLastestProducts();
 			}
@@ -64,8 +67,6 @@ public class HomeController extends HttpServlet {
 			request.setAttribute("products", products);
 			request.setAttribute("categories", categories);
 			rd.forward(request, response);
-
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

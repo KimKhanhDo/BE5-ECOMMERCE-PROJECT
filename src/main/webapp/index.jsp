@@ -76,7 +76,7 @@
 								<span class="sr-only">(current)</span>
 						</a></li>
 
-						<!-- Send http request to Home with payload categoryID= ???? -->
+						<!-- Send http request to Home with payload categoryID=???? -->
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
 								href="Home?categoryId=${category.id}"> ${category.name} </a></li>
@@ -109,7 +109,7 @@
 
 						<!-- search section -->
 						<div class="search_section">
-							<form action="SearchProduct" method="get"
+							<form action="Home" method="get"
 								class="form-inline">
 								<input type="text" name="searchValue" placeholder="Search" />
 								<button class="btn nav_search-btn" type="submit">
@@ -224,6 +224,7 @@
 	<!-- end hero area -->
 
 	<!-- shop section -->
+	<c:if test="${not empty products}">
 	<section class="shop_section layout_padding">
 		<div class="container">
 			<div class="heading_container heading_center">
@@ -257,7 +258,18 @@
 			</div>
 		</div>
 	</section>
+	</c:if>
 	<!-- end shop section -->
+	
+	<c:if test="${empty products}">
+		<section class="shop_section layout_padding">
+			<div class="container">
+				<div class="heading_container heading_center">
+					<h2>No Results Found</h2>
+				</div>
+			</div>
+		</section>
+	</c:if>
 
 	<!-- saving section -->
 

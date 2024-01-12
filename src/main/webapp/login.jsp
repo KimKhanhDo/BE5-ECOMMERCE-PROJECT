@@ -123,7 +123,7 @@
 				<div class="col-md-6 col-lg-3 px-0"></div>
 				<div class="col-md-6 col-lg-6 px-0">
 
-					<!-- Form -->
+					<!-- Start Form -->
 					<form action="Authentication" method="post">
 						<div>
 							<label>Please Login To Your Account</label> <input type="text"
