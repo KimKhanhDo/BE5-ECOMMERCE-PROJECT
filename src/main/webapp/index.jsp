@@ -79,7 +79,7 @@
 						<!-- Send http request to Home with payload categoryID=???? -->
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="Home?categoryId=${category.id}"> ${category.name} </a></li>
+								href="Home?action=CATEGORY&categoryId=${category.id}"> ${category.name} </a></li>
 						</c:forEach>
 					</ul>
 					<!-- end category menu -->
@@ -112,6 +112,7 @@
 							<form action="Home" method="get"
 								class="form-inline">
 								<input type="text" name="searchValue" placeholder="Search" />
+								<input type="hidden" name="action" value="SEARCH" />
 								<button class="btn nav_search-btn" type="submit">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>

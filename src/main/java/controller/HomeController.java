@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -42,20 +43,31 @@ public class HomeController extends HttpServlet {
 
 			String categoryId = request.getParameter("categoryId");
 			String action = request.getParameter("action");
-			String productName = request.getParameter("searchValue");
+			String searchValue = request.getParameter("searchValue");
 
 			// USE MODEL to get PRODUCT LIST (DATA), CATEGORY LIST
 			ProductDAO productDao = new ProductDAO();
 			CategoryDAO categoryDao = new CategoryDAO();
 
-			List<Product> products;
+			List<Product> products = new ArrayList<>();
 
-			if ("SHOW_ALL".equals(action)) {
-				products = productDao.showAllProducts();
-			} else if (categoryId != null) {
-				products = categoryDao.getProductByCategoryId(categoryId);
-			} else if (productName != null) {
-				products = ProductDAO.getProductBySearch(productName);
+			if (action != null) {
+				switch (action) {
+				case "SHOW_ALL":
+					products = productDao.showAllProducts();
+					break;
+				case "CATEGORY":
+					if (categoryId != null) {
+						products = categoryDao.getProductByCategoryId(categoryId);
+					}
+					break;
+				case "SEARCH":
+					if (searchValue != null) {
+						products = ProductDAO.getProductBySearch(searchValue);
+					}
+					break;
+				}
+				// Showing latest products if no specific action is provided
 			} else {
 				products = productDao.getLastestProducts();
 			}
