@@ -1,8 +1,4 @@
-<%@page import="dao.CategoryDAO"%>
-<%@page import="entity.Category"%>
 
-<%@page import="dao.ProductDAO"%>
-<%@page import="entity.Product"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -79,7 +75,7 @@
 						<!-- Send http request to Home with payload categoryID=???? -->
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="Home?action=CATEGORY&categoryId=${category.id}"> ${category.name} </a></li>
+								href="Home?action=SHOW_PRODUCT_BY_CATEGORY&categoryId=${category.id}"> ${category.name} </a></li>
 						</c:forEach>
 					</ul>
 					<!-- end category menu -->
@@ -97,14 +93,14 @@
 							</a>
 						</c:if>
 
-						<c:if test="${sessionScope.userName == null }">
+						<c:if test="${empty sessionScope.userName}">
 							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
 								<span> Login </span></a>
 						</c:if>
 						<!-- End Login/ Logout section -->
 
 
-						<a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+						<a href="Cart?command=VIEW_CART"> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
 
 						<!-- search section -->

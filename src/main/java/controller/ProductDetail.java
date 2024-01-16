@@ -41,8 +41,11 @@ public class ProductDetail extends HttpServlet {
 			CategoryDAO categoryDao = new CategoryDAO();
 			List<Category> categories = categoryDao.getAllCategories();
 			
+			int productId;
+			
 			// GET PRODUCT FROM DB by ProductId from requested parameter
-			String productId = request.getParameter("productId");
+			productId = Integer.parseInt(request.getParameter("productId"));
+
 			Product product = ProductDAO.getProductById(productId);
 			
 			// send DATA TO VIEW

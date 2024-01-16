@@ -42,13 +42,16 @@ public class ProductDAO {
 		return list;
 	}
 
-	public static Product getProductById(String productId) throws SQLException {
+	public static Product getProductById(int productId) throws SQLException {
 
 		Connection connection = DBConnection.makeConnection();
 		String sqlQuery = "SELECT * FROM product WHERE id =?";
+		
+		// Convert the String productId to an int before setting it in the PreparedStatement
+	    //int productIdInt = Integer.parseInt(productId);
 
 		PreparedStatement preStmt = connection.prepareStatement(sqlQuery);
-		preStmt.setString(1, productId);
+		preStmt.setInt(1, productId);
 		ResultSet resultSet = preStmt.executeQuery();
 
 		if (resultSet.next()) {
