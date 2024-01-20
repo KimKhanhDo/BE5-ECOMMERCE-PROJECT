@@ -75,7 +75,8 @@
 						<!-- Send http request to Home with payload categoryID=???? -->
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="Home?action=SHOW_PRODUCT_BY_CATEGORY&categoryId=${category.id}"> ${category.name} </a></li>
+								href="Home?action=SHOW_PRODUCT_BY_CATEGORY&categoryId=${category.id}">
+									${category.name} </a></li>
 						</c:forEach>
 					</ul>
 					<!-- end category menu -->
@@ -85,12 +86,21 @@
 						<c:if test="${not empty sessionScope.user}">
 							<i class="fa fa-user" aria-hidden="true"
 								style="margin-right: 5px;"></i>
-							<span style="margin-right: 5px;"> ${sessionScope.user.userName}
-								&nbsp;</span>
+							<span style="margin-right: 5px;">
+								${sessionScope.user.userName} &nbsp;</span>
 
-							<a href="Authentication"> Logout <i class="fa fa-sign-out"
+							<!-- <a href="Authentication"> Logout <i class="fa fa-sign-out"
 								aria-hidden="true"></i>
-							</a>
+							</a>  -->
+
+							<form action="Authentication?action=LOGOUT" method="post"
+								style="display: inline; margin-right: 20px;">
+								<input type="hidden" name="logout" value="true">
+								<button type="submit"
+									style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+									Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+								</button>
+							</form>
 						</c:if>
 
 						<c:if test="${empty sessionScope.user}">
@@ -99,16 +109,15 @@
 						</c:if>
 						<!-- End Login/ Logout section -->
 
-
-						<a href="Cart?command=VIEW_CART"> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+						<br> <a href="Cart?command=VIEW_CART"> <i
+							class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
 
 						<!-- search section -->
 						<div class="search_section">
-							<form action="Home" method="get"
-								class="form-inline">
-								<input type="text" name="searchValue" placeholder="Search" />
-								<input type="hidden" name="action" value="SEARCH" />
+							<form action="Home" method="get" class="form-inline">
+								<input type="text" name="searchValue" placeholder="Search" /> <input
+									type="hidden" name="action" value="SEARCH" />
 								<button class="btn nav_search-btn" type="submit">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
@@ -222,42 +231,42 @@
 
 	<!-- shop section -->
 	<c:if test="${not empty products}">
-	<section class="shop_section layout_padding">
-		<div class="container">
-			<div class="heading_container heading_center">
-				<h2>Products</h2>
-			</div>
-			<div class="row">
-				<c:forEach items="${products}" var="product">
-					<div class="col-sm-6 col-md-4 col-lg-3">
-						<div class="box">
-							<a href="ProductDetail?productId=${product.id}">
-								<div class="img-box">
-									<img src="images/${product.imgName}" alt="">
-								</div>
-								<div class="detail-box">
-									<h6>${product.name}</h6>
-									<h6>
-										Price <span>$${product.price}</span>
-									</h6>
-								</div> <c:if test="${product.is_new == true}">
-									<div class="new">
-										<span> New </span>
+		<section class="shop_section layout_padding">
+			<div class="container">
+				<div class="heading_container heading_center">
+					<h2>Products</h2>
+				</div>
+				<div class="row">
+					<c:forEach items="${products}" var="product">
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="box">
+								<a href="ProductDetail?productId=${product.id}">
+									<div class="img-box">
+										<img src="images/${product.imgName}" alt="">
 									</div>
-								</c:if>
-							</a>
+									<div class="detail-box">
+										<h6>${product.name}</h6>
+										<h6>
+											Price <span>$${product.price}</span>
+										</h6>
+									</div> <c:if test="${product.is_new == true}">
+										<div class="new">
+											<span> New </span>
+										</div>
+									</c:if>
+								</a>
+							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
+				<div class="btn-box">
+					<a href="Home?action=SHOW_ALL"> View All Products </a>
+				</div>
 			</div>
-			<div class="btn-box">
-				<a href="Home?action=SHOW_ALL"> View All Products </a>
-			</div>
-		</div>
-	</section>
+		</section>
 	</c:if>
 	<!-- end shop section -->
-	
+
 	<c:if test="${empty products}">
 		<section class="shop_section layout_padding">
 			<div class="container">

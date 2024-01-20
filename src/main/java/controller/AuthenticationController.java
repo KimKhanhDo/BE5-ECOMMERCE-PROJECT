@@ -57,6 +57,11 @@ public class AuthenticationController extends HttpServlet {
 				doLogIn(request, response);
 				break;
 			}
+			case "LOGOUT": {
+				doLogOut(request, response);
+				break;
+			}
+
 			default:
 				break;
 			}
@@ -86,9 +91,9 @@ public class AuthenticationController extends HttpServlet {
 		}
 	}
 
-//	private void doLogOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		HttpSession session = request.getSession();
-//		session.removeAttribute("user");
-//		response.sendRedirect("Home");
-//	}
+	private void doLogOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		response.sendRedirect("Home");
+	}
 }

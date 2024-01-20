@@ -153,13 +153,7 @@
 						</div>
 
 						<div class="d-flex align-items-center justify-content-end">
-							<label class="form-check-label mr-2" for="agreeCheckbox">I
-								agree <a href="#">Terms & Conditions</a>
-							</label>
-							<div class="form-check form-check-inline">
-								<input type="checkbox" class="form-check-input"
-									id="agreeCheckbox" required style="transform: scale(1);">
-							</div>
+						
 							<button>REGISTER</button>
 						</div>
 					</form>
