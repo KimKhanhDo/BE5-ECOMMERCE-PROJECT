@@ -82,10 +82,10 @@
 
 					<!-- Login/ Logout section -->
 					<div class="user_option">
-						<c:if test="${not empty sessionScope.userName}">
+						<c:if test="${not empty sessionScope.user}">
 							<i class="fa fa-user" aria-hidden="true"
 								style="margin-right: 5px;"></i>
-							<span style="margin-right: 5px;"> ${sessionScope.userName}
+							<span style="margin-right: 5px;"> ${sessionScope.user.userName}
 								&nbsp;</span>
 
 							<a href="Authentication"> Logout <i class="fa fa-sign-out"
@@ -93,7 +93,7 @@
 							</a>
 						</c:if>
 
-						<c:if test="${empty sessionScope.userName}">
+						<c:if test="${empty sessionScope.user}">
 							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
 								<span> Login </span></a>
 						</c:if>
@@ -240,7 +240,7 @@
 									<h6>
 										Price <span>$${product.price}</span>
 									</h6>
-								</div> <c:if test="${product.isNew == true}">
+								</div> <c:if test="${product.is_new == true}">
 									<div class="new">
 										<span> New </span>
 									</div>

@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UserDAO;
 import entity.User;
 
-
 /**
- * Servlet implementation class RegisterServlet2
+ * Servlet implementation class RegisterController2
  */
-@WebServlet("/Register")
+@WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,34 +40,33 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//doGet(request, response);
+		// This controller used to test with String[] hobbies ONLY
 		
-		// Register Account -->  Read data input from user
-	
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String phoneNo = request.getParameter("phoneNo");
-		String username = request.getParameter("username");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		User user = new User(firstName, lastName, email, phoneNo, username, password);
+		String fullName = request.getParameter("fullName");
+		String email = request.getParameter("email");
+		String gender = request.getParameter("gender");
+	    String[] hobbies = request.getParameterValues("hobby");
+	    User user = new User(userName, password, fullName, email, gender, hobbies);
 
-		UserDAO userDAO = new UserDAO();
-		
-		 try {
-			 if (userDAO.checkExistUserByEmail(email)) {
-	                response.sendRedirect("register.jsp?errorMessage=Email already exists. Please choose another one.");
-	            } else {
-	            	userDAO.registerAccount(user);
-	                response.sendRedirect("login.jsp");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            response.sendRedirect("register.jsp?errorMessage=Error, please try again");
-	        }
-	    }
-		
+	    UserDAO userDAO = new UserDAO();
 
+		try {
+			if (userDAO.checkExistUserByEmail(email)) {
+				response.sendRedirect("register.jsp?errorMessage=Email already exists. Please choose another one.");
+			} else {
+				userDAO.registerAccount(user);
+				response.sendRedirect("login.jsp");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.sendRedirect("register.jsp?errorMessage=Error, please try again");
+		}
 	}
+		
+	}
+	
 
 
+             

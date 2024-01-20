@@ -72,18 +72,18 @@
 						</a></li>
 						<c:forEach items="${categories}" var="category">
 							<li class="nav-item"><a class="nav-link"
-								href="index.jsp?categoryId=${category.id}"> ${category.name}
+								href="Home?categoryId=${category.id}"> ${category.name}
 							</a></li>
 						</c:forEach>
 					</ul>
 					<!-- end category menu -->
 
-					<!-- Login/ Logout section -->
+						<!-- Login/ Logout section -->
 					<div class="user_option">
-						<c:if test="${not empty sessionScope.userName}">
+						<c:if test="${not empty sessionScope.user}">
 							<i class="fa fa-user" aria-hidden="true"
 								style="margin-right: 5px;"></i>
-							<span style="margin-right: 5px;"> ${sessionScope.userName}
+							<span style="margin-right: 5px;"> ${sessionScope.user.userName}
 								&nbsp;</span>
 
 							<a href="Authentication"> Logout <i class="fa fa-sign-out"
@@ -91,7 +91,7 @@
 							</a>
 						</c:if>
 
-						<c:if test="${empty sessionScope.userName}">
+						<c:if test="${empty sessionScope.user}">
 							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
 								<span> Login </span></a>
 						</c:if>

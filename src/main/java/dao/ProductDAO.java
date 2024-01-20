@@ -35,8 +35,11 @@ public class ProductDAO {
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
 			String imgName = resultSet.getString("img_name");
-			boolean isNew = resultSet.getBoolean("is_new");
-			Product product = new Product(id, name, price, imgName, isNew);
+			boolean is_new = resultSet.getBoolean("is_new");
+			int quantity = resultSet.getInt("quantity");
+			String description = resultSet.getNString("description");
+
+			Product product = new Product(id, name, price, imgName, is_new, quantity, description);
 			list.add(product);
 		}
 		return list;
@@ -59,11 +62,11 @@ public class ProductDAO {
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
 			String imgName = resultSet.getString("img_name");
-			boolean isNew = resultSet.getBoolean("is_new");
+			boolean is_new = resultSet.getBoolean("is_new");
 			int quantity = resultSet.getInt("quantity");
 			String description = resultSet.getNString("description");
 
-			Product product = new Product(id, name, price, imgName, isNew, quantity, description);
+			Product product = new Product(id, name, price, imgName, is_new, quantity, description);
 			return product;
 		}
 		return null;
@@ -83,8 +86,11 @@ public class ProductDAO {
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
 			String imgName = resultSet.getString("img_name");
-			boolean isNew = resultSet.getBoolean("is_new");
-			Product product = new Product(id, name, price, imgName, isNew);
+			boolean is_new = resultSet.getBoolean("is_new");
+			int quantity = resultSet.getInt("quantity");
+			String description = resultSet.getNString("description");
+
+			Product product = new Product(id, name, price, imgName, is_new, quantity, description);
 			list.add(product);
 		}
 		return list;
@@ -105,8 +111,11 @@ public class ProductDAO {
 			String name = resultSet.getString("name");
 			int price = resultSet.getInt("price");
 			String imgName = resultSet.getString("img_name");
-			boolean isNew = resultSet.getBoolean("is_new");
-			Product product = new Product(id, name, price, imgName, isNew);
+			boolean is_new = resultSet.getBoolean("is_new");
+			int quantity = resultSet.getInt("quantity");
+			String description = resultSet.getNString("description");
+
+			Product product = new Product(id, name, price, imgName, is_new, quantity, description);
 			list.add(product);
 		}
 		return list;

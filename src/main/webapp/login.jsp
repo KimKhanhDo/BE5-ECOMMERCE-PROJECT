@@ -124,7 +124,7 @@
 				<div class="col-md-6 col-lg-6 px-0">
 
 					<!-- Start Form -->
-					<form action="Authentication" method="post">
+					<form action="Authentication?action=LOGIN" method="post">
 						<div>
 							<label>Please Login To Your Account</label> <input type="text"
 								placeholder="Email" name="email" required />

@@ -32,6 +32,9 @@
 <link href="css/style.css" rel="stylesheet" />
 <!-- responsive style -->
 <link href="css/responsive.css" rel="stylesheet" />
+
+
+
 </head>
 
 <body>
@@ -103,52 +106,52 @@
 				<div class="col-md-6 col-lg-6 px-0">
 
 					<!-- Start Form -->
-					<form action="Register" method="POST">
+					<form action="RegisterController" method="POST">
 
 						<div>
-							<label>First Name* </label> <input type="text"
-								placeholder="First Name" name="firstName" required />
+							<label>User Name </label> <input type="text" placeholder=""
+								name="userName" required />
 						</div>
 
 						<div>
-							<label>Last Name* </label> <input type="text"
-								placeholder="Last Name" name="lastName" required />
+							<label>Password </label> <input type="password" placeholder=""
+								name="password" id="password" required
+								onkeyup="checkReEnterPassword()" />
 						</div>
 
 						<div>
-							<label>Email* </label> <input type="email" placeholder="Email"
+							<label>Full Name </label> <input type="text" placeholder=""
+								name="fullName" required />
+						</div>
+
+						<div>
+							<label>Email </label> <input type="email" placeholder=""
 								name="email" required />
 						</div>
 
+						<!-- Gender Selection (Dropdown) -->
 						<div>
-							<label>Phone* </label> <input type="tel" placeholder="Phone"
-								name="phoneNo" required />
+							<label>Gender </label> <select name="gender" required>
+								<option value="" disabled selected></option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+								<option value="other">Other</option>
+							</select>
 						</div>
 
+						<!-- Interested in (Checkbox) -->
 						<div>
-							<label>Username* </label> <input type="text"
-								placeholder="Username" name="username" required />
+							<label>Hobbies </label> 
+							<input type="checkbox" id="hobby1" name="hobby" value="watches">
+							 <label for="watches">Watches</label>
+
+							<input type="checkbox" id="hobby2" name="hobby" value="toys">
+							<label for="toys">Toys</label>
+							
+							 <input type="checkbox"id="hobby3" name="hobby" value="ring">
+							  <label for="ring">Ring</label>
 						</div>
 
-						<div>
-							<label>Password* </label> <input type="password"
-								placeholder="At least 6 characters" name="password"
-								id="password" required onkeyup="checkReEnterPassword()" />
-						</div>
-
-						<div>
-							<label>Re-enter Password* </label> <span id="errorMessage"
-								style="color: red;"></span> <input type="password"
-								placeholder="" name="reEnterPassword" id="reEnterPassword"
-								required onkeyup="checkReEnterPassword()" />
-						</div>
-
-						<!-- <div class="d-flex ">
-							<label class="inline mr-5"> I agree <a href="#">Terms
-									& Condition</a>
-							</label>
-							<button>REGISTER</button>
-						</div> -->
 						<div class="d-flex align-items-center justify-content-end">
 							<label class="form-check-label mr-2" for="agreeCheckbox">I
 								agree <a href="#">Terms & Conditions</a>
@@ -157,11 +160,11 @@
 								<input type="checkbox" class="form-check-input"
 									id="agreeCheckbox" required style="transform: scale(1);">
 							</div>
-							<button onclick="validateAgreement()">REGISTER</button>
+							<button>REGISTER</button>
 						</div>
 					</form>
 					<!-- End Form -->
-					
+
 					<div>
 						Already have an account? <a href="login.jsp">Sign In </a>
 					</div>
@@ -248,30 +251,6 @@
 	</script>
 	<script src="js/custom.js"></script>
 
-	<script>
-		function checkReEnterPassword() {
-			password = document.getElementById("password").value;
-			reEnterPassword = document.getElementById("reEnterPassword").value;
-			if (password != reEnterPassword) {
-				document.getElementById("errorMessage").innerHTML = "Passwords do NOT match";
-				return false;
-			} else {
-				document.getElementById("errorMessage").innerHTML = "";
-				return true;
-			}
-		}
-	</script>
-
-	<script>
-		function validateAgreement() {
-			var agreeCheckbox = document.getElementById("agreeCheckbox");
-
-			if (!agreeCheckbox.checked) {
-				alert("Please agree to the Terms & Conditions before registering.");
-				return false;
-			}
-		}
-	</script>
 
 </body>
 

@@ -47,7 +47,7 @@ public class HomeController extends HttpServlet {
 			String action = request.getParameter("action");
 			if (action == null) {
 				action = "DEFAULT";
-			}
+			} 
 
 
 			switch (action) {
