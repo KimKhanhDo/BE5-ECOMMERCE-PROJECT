@@ -51,28 +51,27 @@ public class UserDAO {
 	// BCrypt
 	private String hashPassword(String password) {
 		// Generate a BCrypt hash for the password
-		 int costParameter = 10;
-		return BCrypt.hashpw(password, BCrypt.gensalt(costParameter));
+		return BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
+
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException {
-
-		// Hash the password using BCrypt before checking in the database
-		String hashedPassword = hashPassword(password);
-
-		// Check if the user exists and the password is correct
 		Connection connection = DBConnection.makeConnection();
-		String query = "SELECT * FROM user WHERE email = ? AND password = ?";
+		String query = "SELECT * FROM user WHERE email = ?";
 
 		try (PreparedStatement preStmt = connection.prepareStatement(query)) {
 			preStmt.setString(1, email);
-			preStmt.setString(2, hashedPassword);
 
 			try (ResultSet resultSet = preStmt.executeQuery()) {
 				if (resultSet.next()) {
-					String userName = resultSet.getString("user_name");
-					User user = new User(userName);
-					return user;
+					String hashedPasswordFromDB = resultSet.getString("password");
+
+					// Check if the password matches the hashed password from the database
+					if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+						String userName = resultSet.getString("user_name");
+						User user = new User(userName);
+						return user;
+					}
 				}
 			}
 		} catch (SQLException e) {
@@ -96,7 +95,6 @@ public class UserDAO {
 	}
 
 	public void registerAccount(User user) throws SQLException {
-
 		// Check if the user already exists
 		if (checkExistUserByEmail(user.getEmail())) {
 			System.out.println("This Account Already Exists. Please register a new one");
