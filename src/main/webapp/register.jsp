@@ -33,6 +33,23 @@
 <!-- responsive style -->
 <link href="css/responsive.css" rel="stylesheet" />
 
+ <!-- Custom CSS for hobbies section -->
+<style>
+    .hobbies-section {
+        margin-bottom: 15px;
+    }
+
+    .hobbies-section input[type="checkbox"] {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .hobbies-section label {
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+</style>
 
 
 </head>
@@ -106,7 +123,7 @@
 				<div class="col-md-6 col-lg-6 px-0">
 
 					<!-- Start Form -->
-					<form action="RegisterController" method="POST">
+					<form action="Register" method="POST">
 
 						<div>
 							<label>User Name </label> <input type="text" placeholder=""
@@ -140,17 +157,23 @@
 						</div>
 
 						<!-- Interested in (Checkbox) -->
-						<div>
-							<label>Hobbies </label> 
-							<input type="checkbox" id="hobby1" name="hobby" value="watches">
-							 <label for="watches">Watches</label>
+						<!-- Hobbies (Checkbox) -->
+<div class="hobbies-section">
+    <label class="hobbies-label">Hobbies</label>
+    <div class="hobby-checkbox">
+        <input type="checkbox" id="hobby1" name="hobby" value="watches">
+        <label for="hobby1">Watches</label>
+    </div>
+    <div class="hobby-checkbox">
+        <input type="checkbox" id="hobby2" name="hobby" value="toys">
+        <label for="hobby2">Toys</label>
+    </div>
+    <div class="hobby-checkbox">
+        <input type="checkbox" id="hobby3" name="hobby" value="ring">
+        <label for="hobby3">Ring</label>
+    </div>
+</div>
 
-							<input type="checkbox" id="hobby2" name="hobby" value="toys">
-							<label for="toys">Toys</label>
-							
-							 <input type="checkbox"id="hobby3" name="hobby" value="ring">
-							  <label for="ring">Ring</label>
-						</div>
 
 						<div class="d-flex align-items-center justify-content-end">
 						

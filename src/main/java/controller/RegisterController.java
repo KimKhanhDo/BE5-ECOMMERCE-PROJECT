@@ -15,7 +15,7 @@ import entity.User;
 /**
  * Servlet implementation class RegisterController2
  */
-@WebServlet("/RegisterController")
+@WebServlet("/Register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
