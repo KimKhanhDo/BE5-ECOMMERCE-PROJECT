@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CategoryDAO;
+import entity.Category;
 import entity.ProductInCart;
 
 /**
@@ -21,6 +24,8 @@ import entity.ProductInCart;
 @WebServlet("/CartController")
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
 
 
 	/**
@@ -40,6 +45,8 @@ public class CartController extends HttpServlet {
 
 		try {
 			String action = request.getParameter("ACTION");
+			
+		
 			if (action == null) {
 				action = "DEFAULT";
 			}
@@ -70,6 +77,7 @@ public class CartController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// Retrieve shoppingCartItems from the session
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, ProductInCart> shoppingCartItems = (HashMap<Integer, ProductInCart>) session
 				.getAttribute("cart");
 
@@ -90,8 +98,8 @@ public class CartController extends HttpServlet {
 
 		// Print the quantity of each product to the console
 		System.out.println("Quantity of each product in the cart:");
-		for (Map.Entry<Integer, ProductInCart> entry : shoppingCartItems.entrySet()) {
-			System.out.println("Product ID: " + entry.getKey() + ", Quantity: " + entry.getValue().getQuantity());
+		for (Map.Entry<Integer, ProductInCart> item : shoppingCartItems.entrySet()) {
+			System.out.println("Product ID: " + item.getKey() + ", Quantity: " + item.getValue().getQuantity());
 		}
 
 		int totalDistinctProducts = shoppingCartItems.size();
@@ -102,9 +110,14 @@ public class CartController extends HttpServlet {
 
 		response.sendRedirect("ProductDetail?productId=" + productId);
 	}
+	
 
 	public void showCartDetail(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, SQLException {
+		
+		
+		CategoryDAO categoryDao = new CategoryDAO();
+		List<Category> categories;
 		
 		  HttpSession session = request.getSession();
 		  
@@ -112,9 +125,13 @@ public class CartController extends HttpServlet {
 			HashMap<Integer, ProductInCart> shoppingCartItems = (HashMap<Integer, ProductInCart>) session
 		            .getAttribute("cart");
 
-		    request.setAttribute("cart", shoppingCartItems);
+		    
+		    categories = categoryDao.getAllCategories();
+		    request.setAttribute("categories", categories);
 
+		    
 		    RequestDispatcher rd = request.getRequestDispatcher("/shopping-cart.jsp");
+		    request.setAttribute("cart", shoppingCartItems);
 		    rd.forward(request, response);
 	}
 
