@@ -126,5 +126,29 @@ public class UserDAO {
 			insertStatement.executeUpdate();
 		}
 	}
+	
+	
+	public void updatePassword(String newPassword, String email) {
+	    try {
+	        Connection connection = DBConnection.makeConnection();
+	        String query = "UPDATE user SET password = ? WHERE email = ?";
+
+	        // Hash the new password before updating it in the database
+	        String hashedNewPassword = hashPassword(newPassword);
+
+	        try (PreparedStatement pst = connection.prepareStatement(query)) {
+	            pst.setString(1, hashedNewPassword);
+	            pst.setString(2, email);
+
+	            pst.executeUpdate();
+	            
+	            // No need to check rowCount, proceed with a message
+	            System.out.println("Password updated successfully");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 }

@@ -65,7 +65,7 @@
 
 				<br> <a href="CartController?ACTION=VIEW_CART"> <i class ="fa
 						fa-shopping-bag" >
-					</i> ${empty sessionScope.totalDistinctProducts ? 0 : sessionScope.totalDistinctProducts}
+					</i> ${empty sessionScope.cart ? 0 : (empty sessionScope.cart.getItems() ? 0 : sessionScope.cart.getItems().size())}
 					</a>
 
 				<!-- search section -->
