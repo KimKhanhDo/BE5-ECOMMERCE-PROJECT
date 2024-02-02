@@ -84,7 +84,7 @@
 
 
 					<div class="col-sm-6 col-md-4 col-lg-9">
-					
+
 						<!-- <form action="Cart" class="product-form"> -->
 						<div class="box">
 							Quantity: ${product.quantity} <br> Description:
@@ -106,19 +106,28 @@
 							<div class="quantity">
 								<div class="pro-qty-small"
 									style="display: flex; align-items: center;">
+
 									<input type="text" name="quantity" id="quantity" value="1"
 										style="color: red; width: 40px; text-align: center; border: 1px solid #ccc; padding: 5px; margin-right: 5px;" />
 
 									<!-- Add To Cart Form Section -->
 									<form action="CartController" class="product-form">
-										<input type="hidden" name="ACTION" value="ADD_TO_CART" />
-										<input type="hidden" name="productId" value="${product.id}" />
+										<input type="hidden" name="ACTION" value="ADD_TO_CART" /> <input
+											type="hidden" name="productId" value="${product.id}" />
 										<button type="submit" value="ADD TO CART" class="cart-btn"
 											style="outline: none; background-color: transparent; border: 1px solid #ccc; padding: 5px; cursor: pointer;">
 											<i class="fa fa-cart-plus"
 												style="color: red; font-size: 16px;"></i> Add To Cart
 										</button>
 									</form>
+									
+<button type="submit" value="WishList" class="cart-btn"
+        style="outline: none; color: red; background-color: transparent; border: 1px solid #ccc; padding: 5px; cursor: pointer;">
+    &#x2764; <!-- Unicode representation for a heart -->
+</button>
+
+
+
 								</div>
 							</div>
 						</div>

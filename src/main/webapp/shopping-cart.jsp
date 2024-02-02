@@ -1,3 +1,4 @@
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -33,7 +34,7 @@
 	/* Adjust the right margin of the input */
 }
 
-::placeholder {
+:placeholder {
 	font-size: 12px;
 	/* Adjust the font size as needed */
 }
@@ -61,36 +62,59 @@
 		<section class="shop_section layout_padding">
 			<div class="container">
 				<div class="heading_container text-center">
-					<c:if test="${not empty cart}">
+
+					<c:if test="${not empty sessionScope.cart.items}">
 						<h2 class="cart-heading">Your Cart</h2>
 						<div class="row">
-							<c:forEach var="item" items="${cart.items}" varStatus="status">
+							<c:forEach var="productInCart" items="${sessionScope.cart.items}">
 								<div class="col-sm-6 col-md-4 col-lg-3">
 									<div class="box cart-product-box">
 										<div class="img-box cart-product-img">
-											<img src="images/${item.key.imgName}" alt="">
+											<img src="images/${productInCart.imgName}" alt="">
 										</div>
 										<div class="cart-product-details">
-											${item.key.name} $${item.key.price}<br> Quantity :
-											${item.value}<br> Total :$ ${item.key.price * item.value}<br>
-
-
-											<a href="CartController?ACTION=REMOVE&productId=${item.key.id}">
+											${productInCart.name} $${productInCart.price}<br>
+											Quantity : ${productInCart.quantity}<br> Total :$
+											${productInCart.subTotal}<br> <a
+												href="CartController?ACTION=REMOVE&productId=${productInCart.id}">
 												<button
 													style="outline: none; color: red; background-color: none; border: 1px solid #ccc; padding: 5px; cursor: pointer;">
-													 Remove
-												</button>
+													Remove</button>
 											</a>
 
-											
+
 										</div>
 									</div>
 								</div>
 							</c:forEach>
 						</div>
+
+						<!-- total price -->
+						<div class="box">
+							<strong>Total Cart Price: </strong> $<span id="totalCartPrice">${sessionScope.cart.total}</span>
+						</div>
+
+						<div class="box">
+							<c:if test="${empty sessionScope.user}">
+   						 Please <a href="login.jsp">LOGIN</a> to CheckOut
+						</c:if>
+						</div>
+
+						<c:if test="${not empty sessionScope.user}">
+							<!-- Proceed to Checkout button -->
+							<div class="box">
+								<form action="CheckOutController?action=CHECK_OUT" method="post">
+									<button
+										style="outline: none; color: red; background-color: none; border: 1px solid #ccc;"
+										type="submit">Proceed to Checkout</button>
+								</form>
+							</div>
+						</c:if>
+
+
 					</c:if>
 
-					<c:if test="${empty cart}">
+					<c:if test="${empty sessionScope.cart.items}">
 						<h2 class="cart-heading">Your Cart Is Empty</h2>
 					</c:if>
 				</div>

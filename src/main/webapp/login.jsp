@@ -115,6 +115,12 @@
 				<c:if test="${not empty errorMessage}">
 					<p style="color: red;">${errorMessage}</p>
 				</c:if>
+				
+				 <!-- Display the status message -->
+    <c:if test="${not empty status}">
+        <p style="color: green;">${status}</p>
+    </c:if>
+</div>
 
 			</div>
 		</div>
@@ -126,14 +132,14 @@
 					<!-- Start Form -->
 					<form action="Authentication?action=LOGIN" method="post">
 						<div>
-							<label>Please Login To Your Account</label> <input type="text"
+							<input type="text"
 								placeholder="Email" name="email" required />
 						</div>
 						<div>
 							<input type="password" placeholder="Password" name="password"
 								required />
 						</div>
-						<div>Forgot Password?</div>
+						<div><a href="forgot-password.jsp">Forgot Password?</a></div>
 						<div class="button-container">
 							<button type="submit" class="login-button">LOGIN</button>
 							<button type="button" onclick="location.href='register.jsp';"
