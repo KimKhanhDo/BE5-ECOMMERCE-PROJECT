@@ -27,11 +27,15 @@ public class User {
 	}
 
 
-
-	public User(String userName) {
+	public User(int id, String userName) {
 		super();
+		this.id = id;
 		this.userName = userName;
 	}
+
+
+
+
 
 
 }

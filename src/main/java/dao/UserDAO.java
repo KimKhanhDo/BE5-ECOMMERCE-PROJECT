@@ -68,8 +68,9 @@ public class UserDAO {
 
 					// Check if the password matches the hashed password from the database
 					if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+						int userId = resultSet.getInt("id");
 						String userName = resultSet.getString("user_name");
-						User user = new User(userName);
+						User user = new User(userId, userName);
 						return user;
 					}
 				}
